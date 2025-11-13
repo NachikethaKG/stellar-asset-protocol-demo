@@ -1,0 +1,14 @@
+# Render auto-deploy manifest (service will be created when repository is connected to Render)
+# See https://render.com/docs/deploy-a-docker-containers
+
+services:
+  - type: web
+    name: stellar-asset-protocol-demo
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    region: oregon
+    autoDeploy: true
+    ports:
+      - 3000
+    healthCheckPath: /
