@@ -40,9 +40,11 @@ app.get('/demo-payment', async (req, res) => {
     // Do NOT sign here. We return the unsigned base64 XDR so it can be signed by the manager/client.
     const xdr = tx.toEnvelope().toXDR('base64');
 
+    // For safety we do NOT return the source secret in the public API response.
+    // The source secret is logged to the server console for local debugging only.
+    console.log('Temporary source secret (local-only):', source.secret());
     res.json({
       source_public: source.publicKey(),
-      source_secret_demo_only: source.secret(),
       unsigned_xdr: xdr,
       network: 'TESTNET',
     });
